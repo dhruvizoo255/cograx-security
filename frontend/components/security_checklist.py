@@ -26,8 +26,7 @@ def render_checklist(checks: List[Dict]) -> None:
     for c in checks:
         icon = "✅" if c["passed"] else "⚠️"
         color = _SEVERITY_COLOR.get(c["severity"], THEME["muted"])
-        rows.append(
-            f"""
+        rows.append(f"""
             <div style="display:flex;justify-content:space-between;align-items:center;
                         padding:0.45rem 0;border-bottom:1px solid {THEME['border']};">
                 <div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:{THEME['text']};">
@@ -42,6 +41,5 @@ def render_checklist(checks: List[Dict]) -> None:
                         color:{THEME['muted']};padding-bottom:0.35rem;">
                 {c['detail']}
             </div>
-            """
-        )
+            """)
     st.markdown("".join(rows), unsafe_allow_html=True)

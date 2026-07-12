@@ -31,16 +31,14 @@ class AuditRepository:
 
     def _initialize(self) -> None:
         with self._connect() as connection:
-            connection.execute(
-                """CREATE TABLE IF NOT EXISTS audits (
+            connection.execute("""CREATE TABLE IF NOT EXISTS audits (
                     prediction_id TEXT PRIMARY KEY,
                     prediction_hash TEXT NOT NULL UNIQUE,
                     feature_hash TEXT NOT NULL,
                     model_version TEXT NOT NULL,
                     timestamp TEXT NOT NULL,
                     payload TEXT NOT NULL
-                )"""
-            )
+                )""")
             connection.execute(
                 "CREATE INDEX IF NOT EXISTS idx_audits_replay "
                 "ON audits(feature_hash, model_version)"
