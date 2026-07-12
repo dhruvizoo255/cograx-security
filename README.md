@@ -7,11 +7,11 @@
 ## What's working right now
 
 - **Frozen ML artifacts preserved as-is**: `models/rugguard_xgb.pkl` (XGBoost) and `models/scaler.pkl` (StandardScaler), copied byte-for-byte from the upload, never retrained or refit.
-- **Full FastAPI backend** (`backend/`) — clean-architecture layout (`core`, `services`, `repositories`, `api/routes`, `api/schemas`). Verified end-to-end: `/health` (open), `POST /api/v1/predict`, `/api/v1/audit`, `/api/v1/audit/{id}`, `/api/v1/predict/{id}/report`, `/metrics` (validation → scaling → inference → thresholding → SHAP → hashing → optional blockchain anchor → response). Every route except `/health` requires an `X-API-Key` header once `COGRAX_API_KEY` is set — see `docs/SECURITY.md`.
+- **Full FastAPI backend** (`backend/`) --clean-architecture layout (`core`, `services`, `repositories`, `api/routes`, `api/schemas`). Verified end-to-end: `/health` (open), `POST /api/v1/predict`, `/api/v1/audit`, `/api/v1/audit/{id}`, `/api/v1/predict/{id}/report`, `/metrics` (validation → scaling → inference → thresholding → SHAP → hashing → optional blockchain anchor → response). Every route except `/health` requires an `X-API-Key` header once `COGRAX_API_KEY` is set — see `docs/SECURITY.md`.
 - **SHAP explainability**, wired against the frozen model via `shap.TreeExplainer` — confirmed working locally with real output (see example below).
-- **Deterministic security rule engine** — mint/pause/ownership/verification/liquidity/holder-concentration/tax/age/liquidity-depth checks, independent of the ML score.
+- **Deterministic security rule engine** -- mint/pause/ownership/verification/liquidity/holder-concentration/tax/age/liquidity-depth checks, independent of the ML score.
 - **Vyper smart contract** (`blockchain/contracts/RugGuardAudit.vy`) storing prediction evidence on-chain (hash, score, confidence, model version, timestamp), restricted to the contract `owner` (the backend's signer) so evidence is provably backend-generated, plus a `deploy.py` script and a `web3.py`-based `BlockchainService` that degrades gracefully when no chain is configured.
-- **Streamlit dashboard** (`frontend/app.py`) — dark ledger/terminal-styled UI with a risk gauge, SHAP bar chart, security checklist, blockchain status, PDF export, and prediction timeline.
+- **Streamlit dashboard** (`frontend/app.py`) -- dark ledger/terminal-styled UI with a risk gauge, SHAP bar chart, security checklist, blockchain status, PDF export, and prediction timeline.
 
 ### Verified example (real output from this build)
 
