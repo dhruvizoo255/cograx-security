@@ -1,0 +1,306 @@
+[
+  {
+    "name": "PredictionStored",
+    "inputs": [
+      {
+        "name": "predictionId",
+        "type": "bytes32",
+        "indexed": true
+      },
+      {
+        "name": "tokenAddress",
+        "type": "address",
+        "indexed": true
+      },
+      {
+        "name": "wallet",
+        "type": "address",
+        "indexed": true
+      },
+      {
+        "name": "predictionHash",
+        "type": "bytes32",
+        "indexed": false
+      },
+      {
+        "name": "riskScore",
+        "type": "uint256",
+        "indexed": false
+      },
+      {
+        "name": "confidence",
+        "type": "uint256",
+        "indexed": false
+      },
+      {
+        "name": "modelVersion",
+        "type": "string",
+        "indexed": false
+      },
+      {
+        "name": "timestamp",
+        "type": "uint256",
+        "indexed": false
+      }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "OwnershipTransferred",
+    "inputs": [
+      {
+        "name": "previousOwner",
+        "type": "address",
+        "indexed": true
+      },
+      {
+        "name": "newOwner",
+        "type": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "transferOwnership",
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "storePrediction",
+    "inputs": [
+      {
+        "name": "predictionId",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "name": "predictionHash",
+        "type": "bytes32"
+      },
+      {
+        "name": "riskScore",
+        "type": "uint256"
+      },
+      {
+        "name": "confidence",
+        "type": "uint256"
+      },
+      {
+        "name": "modelVersion",
+        "type": "string"
+      },
+      {
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "getPrediction",
+    "inputs": [
+      {
+        "name": "predictionId",
+        "type": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "components": [
+          {
+            "name": "tokenAddress",
+            "type": "address"
+          },
+          {
+            "name": "wallet",
+            "type": "address"
+          },
+          {
+            "name": "predictionHash",
+            "type": "bytes32"
+          },
+          {
+            "name": "riskScore",
+            "type": "uint256"
+          },
+          {
+            "name": "confidence",
+            "type": "uint256"
+          },
+          {
+            "name": "modelVersion",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "exists",
+            "type": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "isDuplicateHash",
+    "inputs": [
+      {
+        "name": "predictionHash",
+        "type": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "owner",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "records",
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "components": [
+          {
+            "name": "tokenAddress",
+            "type": "address"
+          },
+          {
+            "name": "wallet",
+            "type": "address"
+          },
+          {
+            "name": "predictionHash",
+            "type": "bytes32"
+          },
+          {
+            "name": "riskScore",
+            "type": "uint256"
+          },
+          {
+            "name": "confidence",
+            "type": "uint256"
+          },
+          {
+            "name": "modelVersion",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "exists",
+            "type": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "predictionCountByToken",
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "totalPredictions",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "seenHashes",
+    "inputs": [
+      {
+        "name": "arg0",
+        "type": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ]
+  }
+]

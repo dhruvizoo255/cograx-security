@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    ports: ["8000:8000"]
+    environment:
+      COGRAX_AUDIT_DB_PATH: /var/lib/cograx/audit.db
+    volumes: ["audit_data:/var/lib/cograx"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  dashboard:
+    build: .
+    command: streamlit run frontend/app.py --server.address 0.0.0.0
+    env_file: .env
+    environment:
+      COGRAX_API_URL: http://api:8000
+    ports: ["8501:8501"]
+    depends_on: [api]
+volumes:
+  audit_data:
